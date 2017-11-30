@@ -14,4 +14,12 @@ public class WebController {
 
 		return modelAndView;
 	}
+	@RequestMapping("/custodio")
+	ModelAndView custodio(ModelAndView modelAndView) {
+
+		modelAndView.setViewName("custodio");
+
+		return modelAndView;
+	}
+	
 }
