@@ -23,7 +23,7 @@ public class UsuarioController {
 
 		List<Usuario> usuarios = repository.findByUsuarioAndClave(usuario.getUsuario(), usuario.getClave());
 		if (!usuarios.isEmpty()) {
-			return new Response("Done", usuario);
+			return new Response("Done", usuarios.get(0));
 		} else {
 			return new Response("Error", usuario);
 		}

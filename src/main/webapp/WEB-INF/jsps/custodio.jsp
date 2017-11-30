@@ -18,7 +18,7 @@
 		<h1>Custodio</h1>
 
 		<div class="row">
-			<div ng-controller="loginController" class="col-md-3">
+			<div ng-controller="custodioController" class="col-md-3">
 				<div ng-show="verLogin">
 					<h3>Login Custodio</h3>
 					<form name="loginForm" ng-submit="submitLogin()">

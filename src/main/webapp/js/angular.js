@@ -26,9 +26,10 @@ app.controller('postController', function($scope, $http, $location) {
 	}
 });
 
-app.controller('loginController', function($scope, $http, $location) {
+app.controller('custodioController', function($scope, $http, $location) {
 	$scope.verLogin = true;
 	$scope.verDeposito = false;
+	$scope.idUsuario = 0;
 	$scope.submitLogin = function() {
 		var url = $location.absUrl() + "/login";
 		var verLogin = true;
@@ -46,10 +47,11 @@ app.controller('loginController', function($scope, $http, $location) {
 		$http.post(url, data, config).then(function(response) {
 
 			if (response.data.status == "Done") {
+				debugger;
 				$scope.postResultMessage = "Logeado!";
 				$scope.verLogin = false;
 				$scope.verDeposito = true;
-				
+				$scope.idUsuario = response.data.data.id;
 			} else {
 				$scope.postResultMessage = "Error!";
 			}
@@ -58,5 +60,28 @@ app.controller('loginController', function($scope, $http, $location) {
 			$scope.postResultMessage = "Fail!";
 		});
 
+	}
+	
+	$scope.submitDeposito = function() {
+		var url = $location.absUrl() + "/postdeposito";
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+		debugger;
+		var data = {
+			idUsuario : $scope.idUsuario,
+			montoDeposito : $scope.montoDeposito
+		};
+
+		$http.post(url, data, config).then(function(response) {
+			$scope.postResultMessage = "Depositado!";
+		}, function(response) {
+			$scope.postResultMessage = "Error!";
+		});
+
+		$scope.montoDeposito = "";
 	}
 });
