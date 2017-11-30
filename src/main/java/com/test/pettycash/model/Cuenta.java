@@ -25,12 +25,6 @@ public class Cuenta implements Serializable {
 	@Column(name = "tipotransaccion")
 	private String tipoTransaccion;
 
-	@Column(name = "iddeposito")
-	private long idDeposito;
-
-	@Column(name = "idretiro")
-	private long idRetiro;
-
 	@Column(name = "fechatransaccion")
 	private Timestamp fechaTransaccion;
 
@@ -61,22 +55,6 @@ public class Cuenta implements Serializable {
 		this.tipoTransaccion = tipoTransaccion;
 	}
 
-	public long getIdDeposito() {
-		return idDeposito;
-	}
-
-	public void setIdDeposito(long idDeposito) {
-		this.idDeposito = idDeposito;
-	}
-
-	public long getIdRetiro() {
-		return idRetiro;
-	}
-
-	public void setIdRetiro(long idRetiro) {
-		this.idRetiro = idRetiro;
-	}
-
 	public Timestamp getFechaTransaccion() {
 		return fechaTransaccion;
 	}
@@ -85,12 +63,9 @@ public class Cuenta implements Serializable {
 		this.fechaTransaccion = fechaTransaccion;
 	}
 
-	public Cuenta(Double montoCuenta, String tipoTransaccion, long idDeposito, long idRetiro,
-			Timestamp fechaTransaccion) {
+	public Cuenta(Double montoCuenta, String tipoTransaccion, Timestamp fechaTransaccion) {
 		this.montoCuenta = montoCuenta;
 		this.tipoTransaccion = tipoTransaccion;
-		this.idDeposito = idDeposito;
-		this.idRetiro = idRetiro;
 		this.fechaTransaccion = fechaTransaccion;
 	}
 
@@ -98,6 +73,6 @@ public class Cuenta implements Serializable {
 	public String toString() {
 		return String.format(
 				"Cuenta[id=%d, montoCuenta=%d, tipoTransaccion='%s', idDeposito=%d, idRetiro=%d, fechaTransaccion=='%s']",
-				id, montoCuenta, tipoTransaccion, idDeposito, idRetiro, fechaTransaccion);
+				id, montoCuenta, tipoTransaccion, fechaTransaccion);
 	}
 }

@@ -31,7 +31,7 @@ public class DepositoController {
 		Double montoActual = cuentas.get(0).getMontoCuenta();
 		Instant instant = Instant.now();
 		Timestamp ts = instant != null ? new Timestamp(instant.toEpochMilli()) : null;
-		cuentaRepository.save(new Cuenta((montoActual + deposito.getMontoDeposito()),"DEPOSITO",deposito.getId(),0,ts));
+		cuentaRepository.save(new Cuenta((montoActual + deposito.getMontoDeposito()),"DEPOSITO",ts));
 	}
 
 }

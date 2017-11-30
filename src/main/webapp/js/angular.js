@@ -29,7 +29,9 @@ app.controller('postController', function($scope, $http, $location) {
 app.controller('custodioController', function($scope, $http, $location) {
 	$scope.verLogin = true;
 	$scope.verDeposito = false;
+	$scope.verListaPedidos = false;
 	$scope.idUsuario = 0;
+	$scope.montoCuenta = 0;
 	$scope.submitLogin = function() {
 		var url = $location.absUrl() + "/login";
 		var verLogin = true;
@@ -47,7 +49,6 @@ app.controller('custodioController', function($scope, $http, $location) {
 		$http.post(url, data, config).then(function(response) {
 
 			if (response.data.status == "Done") {
-				debugger;
 				$scope.postResultMessage = "Logeado!";
 				$scope.verLogin = false;
 				$scope.verDeposito = true;
@@ -61,7 +62,75 @@ app.controller('custodioController', function($scope, $http, $location) {
 		});
 
 	}
-	
+
+	$scope.consultaCuenta = function() {
+		var url = $location.absUrl() + "/consultaCuenta";
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.get(url, config).then(function(response) {
+			if (response.data.status == "Done") {
+				$scope.montoCuenta = response.data.data.montoCuenta;
+			} else {
+				$scope.postResultMessage = "Error!";
+			}
+		}, function(response) {
+			$scope.postResultMessage = "Fail!";
+		});
+
+	}
+
+	$scope.verPedidos = function() {
+		var url = $location.absUrl() + "/verPedidos";
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.get(url, config).then(function(response) {
+			if (response.data.status == "Done") {
+				$scope.listaPedidos = response.data;
+				$scope.verListaPedidos = true;
+			} else {
+				$scope.postResultMessage = "Error!";
+			}
+
+		}, function(response) {
+			$scope.postResultMessage = "Fail!";
+		});
+
+	}
+	$scope.aprobarPedido = function(id) {
+		var url = $location.absUrl() + "/aprobarPedido";
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			},
+
+			params : {
+				'id' : id
+			}
+		}
+
+		$http.get(url, config).then(function(response) {
+
+			if (response.data.status == "Done") {
+				$scope.postResultMessage = "Pedido Aprobado!";
+			} else {
+				$scope.postResultMessage = "Error!";
+			}
+
+		}, function(response) {
+			$scope.postResultMessage = "Fail!";
+		});
+
+	}
+
 	$scope.submitDeposito = function() {
 		var url = $location.absUrl() + "/postdeposito";
 
@@ -70,7 +139,6 @@ app.controller('custodioController', function($scope, $http, $location) {
 				'Content-Type' : 'application/json;charset=utf-8;'
 			}
 		}
-		debugger;
 		var data = {
 			idUsuario : $scope.idUsuario,
 			montoDeposito : $scope.montoDeposito

@@ -7,5 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.test.pettycash.model.Pedido;
 
 public interface PedidoRepository extends CrudRepository<Pedido, Long> {
-	List<Pedido> findByNombre(String nombre);
+	List<Pedido> findByEstado(String estado);
 }

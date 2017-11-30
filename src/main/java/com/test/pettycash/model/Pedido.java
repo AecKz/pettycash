@@ -31,7 +31,7 @@ public class Pedido implements Serializable {
 	@Column(name = "fechapedido")
 	private Timestamp fechaPedido;
 
-	protected Pedido() {
+	public Pedido() {
 	}
 
 	public long getId() {

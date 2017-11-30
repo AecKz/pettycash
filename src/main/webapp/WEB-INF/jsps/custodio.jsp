@@ -16,7 +16,6 @@
 <body>
 	<div class="container" ng-app="app">
 		<h1>Custodio</h1>
-
 		<div class="row">
 			<div ng-controller="custodioController" class="col-md-3">
 				<div ng-show="verLogin">
@@ -25,19 +24,42 @@
 						<label>Usuario</label> <input type="text" name="usuario"
 							class="form-control" ng-model="usuario" /> <label>Clave</label>
 						<input type="password" name="clave" class="form-control"
-							ng-model="clave" />
+							ng-model="clave" /> <br>
 						<button type="submit" class="btn btn-primary">Login</button>
 					</form>
 				</div>
 				<p>{{postResultMessage}}</p>
 
 				<div ng-show="verDeposito">
+					<div class="container">
+						<h2>Monto actual: {{montoCuenta}}</h2>
+						<button type="button" class="btn btn-primary"
+							ng-click="consultaCuenta()">
+							<span class="glyphicon glyphicon-refresh"></span>
+						</button>
+					</div>
+					<h3>Depositos</h3>
 					<form name="depositoForm" ng-submit="submitDeposito()">
 						<label>Monto a depositar:</label> <input type="text"
 							name="montoDeposito" class="form-control"
-							ng-model="montoDeposito" />
+							ng-model="montoDeposito" /> <br>
 						<button type="submit" class="btn btn-primary">Depositar</button>
 					</form>
+					<h3>Aprobar Retiros</h3>
+					<button class="btn btn-primary" ng-click="verPedidos()">Ver Pedidos</button>
+
+					<div ng-show="verListaPedidos">
+						<ul class="list-group">
+							<li ng-repeat="pedido in listaPedidos.data"><h4
+									class="list-group-item">
+									<strong>Pedido {{$index+1}}</strong><br /> 
+									Nombre: {{pedido.nombre}}<br /> Monto:
+									{{pedido.montoPedido}}
+									<button class="btn btn-default" ng-click="aprobarPedido(pedido.id)">Aprobar</button>
+								</h4></li>
+						</ul>
+					</div>
+
 				</div>
 
 

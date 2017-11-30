@@ -22,9 +22,6 @@ public class Retiro implements Serializable {
 	@Column(name = "idpedido")
 	private long idPedido;
 
-	@Column(name = "idusuarioaprueba")
-	private long idUsuarioAprueba;
-
 	@Column(name = "fechaaprueba")
 	private Timestamp fechaAprueba;
 
@@ -47,13 +44,6 @@ public class Retiro implements Serializable {
 		this.idPedido = idPedido;
 	}
 
-	public long getIdUsuarioAprueba() {
-		return idUsuarioAprueba;
-	}
-
-	public void setIdUsuarioAprueba(long idUsuarioAprueba) {
-		this.idUsuarioAprueba = idUsuarioAprueba;
-	}
 
 	public Timestamp getFechaAprueba() {
 		return fechaAprueba;
@@ -63,14 +53,13 @@ public class Retiro implements Serializable {
 		this.fechaAprueba = fechaAprueba;
 	}
 
-	public Retiro(long idPedido, long idUsuarioAprueba, Timestamp fechaAprueba) {
+	public Retiro(long idPedido, Timestamp fechaAprueba) {
 		this.idPedido = idPedido;
-		this.idUsuarioAprueba = idUsuarioAprueba;
 		this.fechaAprueba = fechaAprueba;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Retiro[id=%d, idPedido=%d, idUsuarioAprueba=%d, fechaAprueba=='%s']", id, idPedido, idUsuarioAprueba, fechaAprueba);
+		return String.format("Retiro[id=%d, idPedido=%d, fechaAprueba=='%s']", id, idPedido, fechaAprueba);
 	}
 }
