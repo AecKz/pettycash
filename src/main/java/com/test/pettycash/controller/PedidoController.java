@@ -2,6 +2,7 @@ package com.test.pettycash.controller;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import com.test.pettycash.model.Retiro;
 import com.test.pettycash.repo.CuentaRepository;
 import com.test.pettycash.repo.PedidoRepository;
 import com.test.pettycash.repo.RetiroRepository;
+import com.test.pettycash.vo.RetiroVO;
 
 @RestController
 public class PedidoController {
@@ -40,6 +42,23 @@ public class PedidoController {
 	public Response findAll() {
 		Iterable<Pedido> listaPedidos = repository.findByEstado("Pedido");
 		return new Response("Done", listaPedidos);
+	}
+	
+	@RequestMapping("custodio/verRetiros")
+	public Response verRetiros() {
+		Iterable<Retiro> listaRetirosAux = retiroRepository.findAll();
+		List<RetiroVO> listaRetiros = new ArrayList<RetiroVO>();
+		for(Retiro retiro: listaRetirosAux) {
+			Pedido pedido = new Pedido();
+			RetiroVO retiroVO = new RetiroVO();
+			pedido = repository.findOne(retiro.getIdPedido());
+			retiroVO.setMonto(pedido.getMontoPedido());
+			retiroVO.setNombre(pedido.getNombre());
+			retiroVO.setFechaAprueba(retiro.getFechaAprueba());
+			listaRetiros.add(retiroVO);
+		}
+		
+		return new Response("Done", listaRetiros);
 	}
 
 	@RequestMapping("custodio/aprobarPedido")

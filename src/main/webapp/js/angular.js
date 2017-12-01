@@ -30,6 +30,7 @@ app.controller('custodioController', function($scope, $http, $location) {
 	$scope.verLogin = true;
 	$scope.verDeposito = false;
 	$scope.verListaPedidos = false;
+	$scope.verListaRetiros = false;
 	$scope.idUsuario = 0;
 	$scope.montoCuenta = 0;
 	$scope.submitLogin = function() {
@@ -95,6 +96,28 @@ app.controller('custodioController', function($scope, $http, $location) {
 			if (response.data.status == "Done") {
 				$scope.listaPedidos = response.data;
 				$scope.verListaPedidos = true;
+			} else {
+				$scope.postResultMessage = "Error!";
+			}
+
+		}, function(response) {
+			$scope.postResultMessage = "Fail!";
+		});
+
+	}
+	
+	$scope.verRetiros = function() {
+		var url = $location.absUrl() + "/verRetiros";
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+
+		$http.get(url, config).then(function(response) {
+			if (response.data.status == "Done") {
+				$scope.listaRetiros = response.data;
+				$scope.verListaRetiros = true;
 			} else {
 				$scope.postResultMessage = "Error!";
 			}

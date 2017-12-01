@@ -59,6 +59,21 @@
 								</h4></li>
 						</ul>
 					</div>
+					
+					<h3>Historico Retiros</h3>
+					<button class="btn btn-primary" ng-click="verRetiros()">Ver Retiros</button>
+
+					<div ng-show="verListaRetiros">
+						<ul class="list-group">
+							<li ng-repeat="retiro in listaRetiros.data"><h4
+									class="list-group-item">
+									<strong>Retiro {{$index+1}}</strong><br /> 
+									Nombre: {{retiro.nombre}}<br /> Monto:
+									{{retiro.monto}}<br /> Fecha:
+									{{retiro.fechaAprueba | date: 'yyyy-MM-dd HH:mm:ss'}}
+								</h4></li>
+						</ul>
+					</div>
 
 				</div>
 
