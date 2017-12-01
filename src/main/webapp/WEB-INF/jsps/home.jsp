@@ -21,10 +21,14 @@
 			<div ng-controller="postController" class="col-md-3">
 				<form name="pedidoForm" ng-submit="submitForm()">
 					<label>Nombre</label>
-					<input type="text" name="nombre" class="form-control" ng-model="nombre" />
+					<input type="text" name="nombre" placeholder="Pablo" class="form-control" ng-model="nombre" required/>
+					<span ng-show="!pedidoForm.$pristine && pedidoForm.nombre.$error.required">El nombre es requerido</span>
+					<br>
 					<label>Monto</label>
-					<input type="text" name="monto" class="form-control" ng-model="monto" />
-					<button type="submit" class="btn btn-primary">Pedir</button>
+					<input type="number" name="monto" placeholder="55.46" class="form-control" ng-model="monto" required/>
+					<span ng-show="!pedidoForm.$pristine && pedidoForm.monto.$error.required">El monto es requerido</span>
+					<br>
+					<button type="submit" class="btn btn-primary" ng-disabled="!pedidoForm.$valid">Pedir</button>
 				</form>
 				<p>{{postResultMessage}}</p>
 			</div>

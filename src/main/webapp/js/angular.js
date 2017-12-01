@@ -144,6 +144,8 @@ app.controller('custodioController', function($scope, $http, $location) {
 
 			if (response.data.status == "Done") {
 				$scope.postResultMessage = "Pedido Aprobado!";
+				$scope.verListaPedidos = false;
+				$scope.verListaRetiros = false;
 			} else {
 				$scope.postResultMessage = "Error!";
 			}
